@@ -1,0 +1,95 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+}
+main{
+  margin: 10px;
+}
+.container{
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.top{
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.difficulty{
+  display: flex;
+  align-items: center;
+}
+.middle{
+  display: flex;
+  justify-content: space-between;
+}
+.middleX, .middleO{
+  width: 300px;
+  padding: 10px 10px 10px 20px;
+  margin: 10px 5px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.bottom{
+  padding: 20px;
+}
+.boxes{
+  background-color:rgb(186, 196, 186);
+  width: 100%;
+  padding: 30px;
+}
+.background {
+  background-color: blueviolet;
+  width: fit-content;
+  margin: auto;
+}
+.row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* gap: 10px; */
+}
+.row-2{
+  margin: 10px 0;
+}
+.box{
+  background-color:rgb(186, 196, 186);
+  position: relative;
+  font-size: 75px;
+  height: 100px;
+  width: 100px;
+}
+.play{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+}
+.box-2{
+    margin: 0 10px;
+}
+input[type='checkbox']{
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+}
+.restart{
+  padding: 20px;
+}
+.feedback{
+  text-align: right;
+}

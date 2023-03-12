@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="ex2.css">
+  <script src="ex2.js" defer></script>
+</head>
+<body>
+  <main >
+    <div class="container">
+      <section class="top">
+        <div class="difficulty">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+          </svg>medium
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
+            <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+          </svg>
+        </div>
+      </section>
+      <section class="middle">
+        <div class="middleX">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+          </svg>
+          <span>score: <span id="crossScore">0</span></span>
+        </div>
+        <div class="middleO">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          </svg>
+          <span>score: <span id="circleScore">0</span></span>
+        </div>
+      </section>
+      <div class="bottom"><span id="turn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/></svg></span> Turn</div>
+      <div class="boxes">
+        <div class="background">
+          <div class="row row-1">
+            <div class="box" id="boxOne">
+              <input type="checkbox" id="checkOne">
+              <span id="play"></span>
+            </div>
+            <div class="box box-2" id="boxTwo">
+              <input type="checkbox" id="checkTwo">
+              <span id="play"></span>
+            </div>
+            <div class="box" id="boxThree">
+              <input type="checkbox" id="checkThree">
+              <span id="play"></span>
+            </div>
+          </div>
+          <div class="row row-2">
+            <div class="box" id="boxFour">
+              <input type="checkbox" id="checkFour">
+              <span id="play"></span>
+            </div>
+            <div class="box box-2" id="boxFive">
+              <input type="checkbox" id="checkFive">
+              <span id="play"></span>
+            </div>
+            <div class="box" id="boxSix">
+              <input type="checkbox" id="checkSix">
+              <span id="play"></span>
+            </div>
+          </div>
+          <div class="row row-3">
+            <div class="box" id="boxSeven">
+              <input type="checkbox" id="checkSeven">
+              <span id="play"></span>
+            </div>
+            <div class="box box-2" id="boxEight">
+              <input type="checkbox" id="checkEight">
+              <span id="play"></span>
+            </div>
+            <div class="box" id="boxNine">
+              <input type="checkbox" id="checkNine">
+              <span id="play"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="restart">RESTART GAME</div>
+    </div>
+    <div class="feedback"><cite>Feedback</cite></div>
+</main>
+</body>
+</html>
