@@ -1,0 +1,36 @@
+body{
+  background-color: #ffcc00;
+}
+nav.navbar{
+  background-color: #fff;
+}
+nav.top-navbar{
+  background-color: black;
+  color: white;
+}
+#banner{
+  width: 500px;
+  height: 1000px;
+  position: relative;
+}
+#banner > img{
+  position: absolute;
+}
+.titleOfBanner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: black;
+  color: white;
+}
+
+@media (width >= 1500px) {
+  nav.top-navbar.navbar{
+    display: none;
+  }
+}
+@media (width < 1500px) {
+  nav.nd-navbar.navbar{
+    display: none;
+  }
+}

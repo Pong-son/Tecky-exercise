@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1st Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <header>
+    <nav>Menu Bar
+      <ul>
+        <li><a href="../../WEFV01/WEF008/index.html">Home</a></li>
+        <li><a href="../../WEFV01/WEF008/about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="controlTool">
+    <span><button onclick="startStopBtn()" id="startBtn">test</button></span>
+    <span>Start/Stop</span>
+    <button id="small">Small Screen</button>
+    <button id="middle">Middle Screen</button>
+    <button id="large">Large Screen</button>
+    <button id="gosperGliderGun">Gosper Glider Gun</button>
+    <button id="glider">Glider</button>
+    <button id="lightweightSpaceShip">Lightweight Space Ship</button>
+    <button id="copperheadSpaceship">Copperhead Spaceship</button>
+    <span id="born"></span>
+    <span id="die"></span>
+    <span>Speed: <label for="controlSpeed"></label><input type="range" name="controlSpeed" id="controlSpeed" min="0.5" max="50" value="1" step="0.1"></span>
+  </section>
+  <div id='canvas'>
+  </div>
+  <button id="reset-game">Reset</button>
+  <button id="resetZero">Reset to Zero</button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+  <script src="project.js"></script>
+</body>
+</html>
