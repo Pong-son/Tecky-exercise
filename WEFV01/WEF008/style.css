@@ -1,4 +1,8 @@
-body{
+main{
+  padding-top: 15px;
+}
+
+.lightMode{
   background-color: black;
   color: white;
 }

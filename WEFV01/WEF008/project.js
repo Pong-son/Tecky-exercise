@@ -1,53 +1,83 @@
 // Model/data
+let modeColor = {
+  dark:true,
+  backgroundColor:'black',
+  fontColor:'white',
+  box0Color:'white',
+  box1Color:'lightgreen',
+  box2Color:'green',
+  box3Color:'darkgreen',
+  blkBgColor:'white',
+  strokeColor:'black',
+  selectStrokeColor:'blue',
+  stableColor:'black'
+}
+
 let start = false
 let countDie = 0
+document.querySelector('#dieCount').textContent = countDie
 let countBorn = 0
+document.querySelector('#bornCount').textContent = countBorn
 const startStopBtn = () => {
   changeStartBtn()
     start = !start
 }
 const startbtn = document.querySelector('#startBtn')
+let turnNo = document.querySelector('#turnCount')
+let frameNo = 0
 
-startbtn.textContent = 'START'
+const condition = {
+  // Survival
+  surNeiLess:2,
+  surNeiMore:3,
+  surCurrent:1,
+  // Reproduction
+  repCurrent:0,
+  repNei:3
+}
 
-const unitLength  = 50;
-const boxColor    = 150;
-const strokeColor = 50;
 let slider
-let blueColor
-let yellowColor
-let columns; /* To be determined by window width */
-let rows;    /* To be determined by window height */
-let currentBoard;
-let nextBoard;
+
+let currentBoard
+let nextBoard
+
 let speed = document.querySelector('#controlSpeed')
-let speedValue =document.querySelector('[for="controlSpeed"]')
+let speedValue = document.querySelector('[for="controlSpeed"]')
 speedValue.textContent = speed.value
-speed.addEventListener('input',(e) => {
+let fr = 1
+speed.addEventListener('change',(e) => {
   speedValue.textContent = e.target.value
+  setFrame(parseInt(e.target.value))
+  if (start === true) {
+    loop()
+  } else {
+    noLoop()
+  }
 })
-let fr = speed.value
+let size = document.querySelector('#controlSize')
+let sizeValue = document.querySelector('[for="controlSize"]')
+sizeValue.textContent = size.value
+let unitLength = parseInt(size.value)
+size.addEventListener('change',(e) => {
+  sizeValue.textContent = e.target.value
+  unitLength = parseInt(e.target.value)
+  redraw()
+  if (start === true) {
+    loop()
+  } else {
+    noLoop()
+  }
+})
 
-
-let keyX = 0
-let keyY = 0
-let kbCursor
+let columns = Math.floor(8000  / unitLength);
+let rows    = Math.floor(3500 / unitLength);
 
 function setup(){
-  textSize(30);
-  textAlign(CENTER);
-  slider = createSlider(0.5,10,2,speedValue.textContent)
-  slider.position(50,50)
-  slider.style('width','100px')
-	/* Set the canvas to be under the element #canvas*/
-	const canvas = createCanvas(windowWidth - 100, windowHeight - 200);
+  /* Set the canvas to be under the element #canvas*/
+	const canvas = createCanvas(unitLength * floor((windowWidth - 100)/1.5/unitLength), unitLength * floor((windowHeight - 200)/1.5/unitLength));
 	canvas.parent(document.querySelector('#canvas'));
-
-  frameRate(fr)
 	/*Calculate the number of columns and rows */
-	columns = floor(width  / unitLength);
-	rows    = floor(height / unitLength);
-	
+
 	/*Making both currentBoard and nextBoard 2-dimensional matrix that has (columns * rows) boxes. */
 	currentBoard = [];
 	nextBoard = [];
@@ -55,59 +85,46 @@ function setup(){
 	for (let i = 0; i < columns; i++) {
 		currentBoard[i] = [];
 		nextBoard[i] = []
-    }
+  }
 	// Now both currentBoard and nextBoard are array of array of undefined values.
 	initRandomState();  // Set the initial values of the currentBoard and nextBoard
+  keyPressed()
   noLoop()
 }
-
-
-// control initial -state
-function initRandomState() {
-	for (let i = 0; i < columns; i++) {
-		for (let j = 0; j < rows; j++) {
-			currentBoard[i][j] = (Math.random()) > 0.9?1:0;
-			nextBoard[i][j] = 0;
-      staticStatus[i + '' + j] = 0
-		}
-	}
+function setFrame(value) {
+  return fr = value
 }
-
-
 function draw() {
-  console.log('draw')
-  text(frameCount, width / 2, height / 2);
-
-  if(speed.value > 10) {
-    console.log('test')
-  }
-  let fr = slider.value()
   frameRate(fr)
-  blueColor = color(0,0,255)
-    background(255);
-    if(start) {
-      generate();
-    }
-    for (let i = 0; i < columns; i++) {
-        for (let j = 0; j < rows; j++) {
-            if (currentBoard[i][j] === 1){
-                fill(boxColor);  
-            } else if (currentBoard[i][j] === 2) {
-                fill(100)
-            } else if (currentBoard[i][j] === 3) {
-              fill(000)
-            } else {
-                fill(255);
-            }
-            if (staticStatus[i+''+j] > 3 && currentBoard[i][j] >= 1) {
-              fill(blueColor)
-            }
-            stroke(strokeColor);
-            rect(i * unitLength, j * unitLength, unitLength, unitLength);
-        }
+  turnNo.textContent = frameNo
+  background(modeColor.blkBgColor);
+  if(start) {
+    generate();
+  }
+  for (let i = 0; i < columns; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (currentBoard[i][j] === 1){
+        fill(modeColor.box1Color);  
+      } else if (currentBoard[i][j] === 2) {
+        fill(modeColor.box2Color)
+      } else if (currentBoard[i][j] === 3) {
+        fill(modeColor.box3Color)
+      } else {
+        fill(modeColor.box0Color);
+      }
+      if (staticStatus[i+''+j] > 3 && currentBoard[i][j] >= 1) {
+        fill(modeColor.stableColor)
+      }
+      stroke(modeColor.strokeColor)
+      rect(i * unitLength, j * unitLength, unitLength, unitLength);
     }
   }
-
+  if (start) {
+    frameNo++
+  }
+  document.querySelector('#dieCount').textContent = countDie
+  document.querySelector('#bornCount').textContent = countBorn
+}
 function generate() {
   //Loop over every single box on the board
   for (let x = 0; x < columns; x++) {
@@ -116,42 +133,45 @@ function generate() {
       let neighbors = 0;
       for (let i of [-1, 0, 1]) {
         for (let j of [-1, 0, 1]) {
-          if( i == 0 && j == 0 ){
-          // the cell itself is not its own neighbor
-          continue;
-          }
+          if(i === 0 && j === 0){
+            // the cell itself is not its own neighbor
+          continue
+        }
         // The modulo operator is crucial for wrapping on the edge
-          neighbors += (currentBoard[(x + i + columns) % columns][(y + j + rows) % rows] > 0)?1:0;
+        if (noBoundary) {
+          neighbors += (currentBoard[(x + i + columns) % columns][(y + j + rows) % rows]> 0)?1:0 
+        } else {
+          if ( columns > (x + i) && (x + i) >= 0 && rows > (y + j) && (y + j) >= 0) {
+            neighbors += ((currentBoard[x + i][y + j]) > 0)?1:0
+          }
         }
       }
-
+    }
       // Rules of Life
-      if (currentBoard[x][y] >= 1 && neighbors < 2) {
-        // Die of Loneliness
+      if (currentBoard[x][y] >= condition.surCurrent && neighbors < condition.surNeiLess) {
+        // "Die" of Loneliness
         nextBoard[x][y] = 0;
         staticStatus[x + '' + y] = 0
-        countDie = countDie + 1;
-        //   console.log('Die',countDie);
-      } else if (currentBoard[x][y] >= 1 && neighbors > 3) {
-        // Die of Overpopulation
+        countDie++
+      } else if (currentBoard[x][y] >= condition.surCurrent && neighbors > condition.surNeiMore) {
+        // "Die" of Overpopulation
         nextBoard[x][y] = 0;
         staticStatus[x + '' + y] = 0
-        countDie = countDie + 1;
-        //   console.log('Die',countDie);
-      } else if (currentBoard[x][y] >= 1 && (neighbors == 2 || neighbors == 3)) {
-        // Die of Overpopulation
+        countDie++
+      } else if (currentBoard[x][y] >= condition.surCurrent && (neighbors === condition.surNeiLess || neighbors === condition.surNeiMore)) {
+        // "unchange"
         nextBoard[x][y] = neighbors;
+        // count for stable
         if (nextBoard[x][y] === currentBoard[x][y]) {
           staticStatus[x + '' + y]++
         } else {
           staticStatus[x + '' + y] = 0
         }
-        
-      } else if (currentBoard[x][y] == 0 && neighbors == 3) {
+      } else if (currentBoard[x][y] === condition.repCurrent && neighbors === condition.repNei) {
         // New life due to Reproduction
         nextBoard[x][y] = 1;
         staticStatus[x + '' + y] = 0
-        countBorn = countBorn + 1;
+        countBorn++
         //   console.log('Born',countBorn);
       } else {
         // Static
@@ -162,129 +182,180 @@ function generate() {
       }
     }
   }
-  //   document.querySelector('#born').innerHTML = countBorn
-  //   document.querySelector('#die').innerHTML = countDie
+  // document.querySelector('#born').innerHTML = countBorn
+  // document.querySelector('#die').innerHTML = countDie
   // Swap the nextBoard to be the current Board
   [currentBoard, nextBoard] = [nextBoard, currentBoard];
 }
 /**
  * When mouse is dragged
- */
+*/
+let pointer = {x:0,y:0}
+let prePointer = {x:0,y:0}
+
 function mouseDragged() {
+  prePointer.x = pointer.x
+  prePointer.y = pointer.y
   /**
    * If the mouse coordinate is outside the board
-   */
-  if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
-      return;
+  */
+  pointer.x = Math.floor(mouseX / unitLength);
+  pointer.y = Math.floor(mouseY / unitLength);
+  if (pointer.x !== prePointer.x || pointer.y !== prePointer.y) {
+    if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+        return;
+    }
+    if (currentBoard[pointer.x][pointer.y] === 0) {
+      currentBoard[pointer.x][pointer.y] = 1
+      fill(modeColor.box1Color)
+      stroke(modeColor.strokeColor)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+    } else {
+      currentBoard[pointer.x][pointer.y] = 0
+      fill(modeColor.box0Color)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+    }
+  } else {
   }
-  const x = Math.floor(mouseX / unitLength);
-  const y = Math.floor(mouseY / unitLength);
-  currentBoard[x][y] = 1;
-  fill(boxColor);
-  stroke(strokeColor);
-  rect(x * unitLength, y * unitLength, unitLength, unitLength);
+  blocked()
+  // return pointer
 }
-
-/**
-* When mouse is pressed
-*/
 function mousePressed() {
-  noLoop();
-  mouseDragged();
+  pointer.x = Math.floor(mouseX / unitLength)
+  pointer.y = Math.floor(mouseY / unitLength)
+  if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+    return;
+}
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    currentBoard[pointer.x][pointer.y] = 1
+    fill(modeColor.box1Color)
+    stroke(modeColor.strokeColor)
+    rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+  } else {
+    currentBoard[pointer.x][pointer.y] = 0
+    fill(modeColor.box1Color)
+    rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+  }
+  blocked()
+  noLoop()
+}
+function mouseReleased() {
+  stroke(modeColor.strokeColor)
+  if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+    return;
+  }
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    fill(modeColor.box0Color)
+  } else {
+    fill(modeColor.box1Color)
+  }
+  rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+}
+function keyPressed() {
+  prePointer.x = pointer.x
+  prePointer.y = pointer.y
+  
+  if (keyCode === RIGHT_ARROW) {
+    if (pointer.x === (floor(width / unitLength)-1)) {
+      pointer.x = floor(width / unitLength) -1
+    } else {
+      pointer.x++
+    }
+  } else if (keyCode === LEFT_ARROW) {
+    if (pointer.x < 1) {
+      pointer.x = 0
+    } else {
+      pointer.x--
+    }
+  } else if (keyCode === DOWN_ARROW) {
+    if (pointer.y === (floor(height / unitLength) - 1)) {
+      pointer.y = floor(height / unitLength) - 1
+    } else {
+      pointer.y++
+    }
+  } else if (keyCode === UP_ARROW) {
+    if (pointer.y < 1) {
+      pointer.y = 0
+    } else {
+      pointer.y--
+    }
+  } else if (keyCode === ENTER) {
+    if (currentBoard[pointer.x][pointer.y] === 0) {
+      fill(modeColor.box1Color)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+      currentBoard[pointer.x][pointer.y] = 1
+      noFill()
+    } else {
+      fill(modeColor.box0Color)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+      currentBoard[pointer.x][pointer.y] = 0
+      noFill()
+    }
+  }
+  // strokeWeight(4)
+  blocked()
+}
+function keyReleased() {
+  stroke(modeColor.strokeColor)
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    fill(modeColor.box0Color)
+  } else {
+    fill(modeColor.box1Color)
+  }
+  rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+}
+// highlight current Block
+function blocked() {
+  stroke(modeColor.selectStrokeColor)
+  rect(pointer.x * unitLength +2.5, pointer.y * unitLength +2.5, unitLength -5, unitLength -5)
+
+  if (prePointer.x !== pointer.x || prePointer.y !== pointer.y ) {
+    if (currentBoard[prePointer.x][prePointer.y] === 0) {
+      fill(modeColor.box0Color)
+      rect(prePointer.x * unitLength, prePointer.y * unitLength, unitLength, unitLength)
+    } else {
+      fill(modeColor.box1Color)
+      rect(prePointer.x * unitLength, prePointer.y * unitLength, unitLength, unitLength)
+    }
+    stroke(modeColor.strokeColor)
+    rect(prePointer.x * unitLength, prePointer.y * unitLength, unitLength, unitLength)
+    noFill()
+    noStroke()
+  }
 }
 
-// function mouseReleased() {
-//   loop();
-// }
-
-document.querySelector('#reset-game').addEventListener('click', function() {
-  initRandomState();
-  redraw()
-});
 document.querySelector('#resetZero').addEventListener('click', function() {
-		initZero();
-    redraw()
+  if (start === true) {
+    startStopBtn()
+  }
+  initZero()
+  redraw()
 });
 
 function changeStartBtn () {
-    if(start){
-        startbtn.textContent = 'START'
-        noLoop()
-    } else {
-        startbtn.textContent = 'STOP'
-        loop()
-    }
+  if(start){
+    startbtn.textContent = 'START'
+    noLoop()
+  } else {
+    startbtn.textContent = 'STOP'
+    frameNo++
+    loop()
+  }
 }
 
-function keyPressed() {
-  yellowColor = color(255,0,0)
-  console.log(floor(width / unitLength),floor(height / unitLength))
-  x = floor(width);
-  y = floor(height);
-  print(key, ' ', keyCode,' ',keyX,keyY)
-  if (keyCode === RIGHT_ARROW) {
-    if (keyX === (floor(width / unitLength)-1)) {
-      keyX = floor(width / unitLength) -1
-    } else {
-      keyX++
-    }
-  } else if (keyCode === LEFT_ARROW) {
-    if (keyX < 1) {
-      keyX = 0
-    } else {
-      keyX--
-    }
-  } else if (keyCode === DOWN_ARROW) {
-    if (keyY === (floor(height / unitLength) - 1)) {
-      keyY = floor(height / unitLength) - 1
-    } else {
-      keyY++
-    }
-  } else if (keyCode === UP_ARROW) {
-    if (keyY < 1) {
-      keyY = 0
-    } else {
-      keyY--
-    }
-  } else if (keyCode === ENTER) {
-    currentBoard[keyX][keyY]
-  }
-  kbCursor
-  fill(yellowColor);
-  rect(keyX * unitLength, keyY * unitLength, unitLength, unitLength)
-}
+
 
 document.querySelector('#small').addEventListener('click',function windowResized() {
-  resizeCanvas((windowWidth - 100) / 2, (windowHeight - 200) / 2)
+  resizeCanvas(unitLength * floor(((windowWidth - 100)/2)/unitLength), unitLength * floor(((windowHeight - 200)/2)/unitLength))
 })
 document.querySelector('#middle').addEventListener('click',function windowResized() {
-  resizeCanvas((windowWidth - 100), (windowHeight - 200))
+  resizeCanvas(unitLength * floor((windowWidth - 100)/1.5/unitLength), unitLength * floor((windowHeight - 200)/1.5/unitLength))
 })
 document.querySelector('#large').addEventListener('click',function windowResized() {
-  resizeCanvas((windowWidth - 100) * 2, (windowHeight - 200) * 2)
+  resizeCanvas(unitLength * floor((windowWidth - 100)/unitLength), unitLength * floor((windowHeight - 200)/unitLength))
 })
 
-
-document.querySelector('#gosperGliderGun').addEventListener('click',() => {
-  initZero()
-  initgGG()
-  redraw()
-})
-document.querySelector('#glider').addEventListener('click',() => {
-  initZero()
-  initG()
-  redraw()
-})
-document.querySelector('#lightweightSpaceShip').addEventListener('click',() => {
-  initZero()
-  initlSS()
-  redraw()
-})
-document.querySelector('#copperheadSpaceship').addEventListener('click',() => {
-  initZero()
-  initcSS()
-  redraw()
-})
+// pattern of Game of Life
 function initRandomState() {
 	for (let i = 0; i < columns; i++) {
 		for (let j = 0; j < rows; j++) {
@@ -295,6 +366,9 @@ function initRandomState() {
 	}
 }
 function initZero() {
+  frameNo = 0
+  countBorn = 0
+  countDie = 0
 	for (let i = 0; i < columns; i++) {
 		for (let j = 0; j < rows; j++) {
 			currentBoard[i][j] = 0;
@@ -389,5 +463,88 @@ function initcSS() {
   currentBoard[10][5] = 1
   currentBoard[10][7] = 1
 }
+// Control
+let pattern = document.querySelector('#patternSelect')
+document.querySelector('#goBtn').addEventListener('click', () => {
+  if (start === true) {
+    startStopBtn()
+  }
+  initZero()
+  if (pattern.value === 'random') {
+    initRandomState()
+  } else if (pattern.value === 'glider') {
+    initG()
+  } else if (pattern.value === 'lightweightSpaceShip') {
+    initlSS()
+  } else if (pattern.value === 'copperheadSpaceship') {
+    initcSS()
+  } else if (pattern.value === 'gosperGliderGun') {
+    initgGG()
+  }
+  redraw()
+})
 
+// window.innerHeight, window.innerWidth
+console.log(window.innerHeight, window.innerWidth)
+let noBoundary = false
+document.querySelector('#noBound').addEventListener('click', () => {
+  noBoundary = !noBoundary
+  if (start === true) {
+    loop()
+  } else {
+    noLoop()
+  }
+})
 
+// rule controller
+document.querySelector('#saveBtn').addEventListener('click',()=>{
+  condition.surNeiLess = Number(document.querySelector('#surNeiLess').value)
+  condition.surNeiMore = Number(document.querySelector('#surNeiMore').value)
+  condition.repCurrent = Number(document.querySelector('#surCur').value)
+  condition.repNei = Number(document.querySelector('#repNei').value)
+  condition.repCurrent = Number(document.querySelector('#repCur').value)
+})
+
+// mode controller
+document.querySelector('#viewMode').addEventListener('click',() => {
+  if (start === true) {
+    startStopBtn()
+  }
+  if(modeColor.dark) {
+    modeColor = {
+      dark:false,
+      backgroundColor:'black',
+      fontColor:'white',
+      box0Color:'black',
+      box1Color:'lightblue',
+      box2Color:'blue',
+      box3Color:'darkblue',
+      blkBgColor:'black',
+      strokeColor:'white',
+      selectStrokeColor:'darkyellow',
+      stableColor:'darkgrey'
+    }
+    document.querySelector('body').classList.add('lightMode')
+    document.querySelector('.btn-primary').classList.remove('btn-primary')
+    document.querySelector('#startBtn').classList.remove('btn-primary')
+    document.querySelector('#startBtn').classList.add('btn-light') 
+  } else {
+    modeColor = {
+      dark:true,
+      backgroundColor:'black',
+      fontColor:'white',
+      box0Color:'white',
+      box1Color:'lightgreen',
+      box2Color:'green',
+      box3Color:'darkgreen',
+      blkBgColor:'white',
+      strokeColor:'black',
+      selectStrokeColor:'blue',
+      stableColor:'black'
+    }
+    document.querySelector('body').classList.remove('lightMode')
+    document.querySelector('#startBtn').classList.remove('btn-light')
+    document.querySelector('#startBtn').classList.add('btn-primary')
+  }
+  redraw()
+})

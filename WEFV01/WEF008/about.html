@@ -4,27 +4,49 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>1st Project</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: black; color: white;">
-  <div >
-    <h1>Here are some of the topics that you need to work on:</h1>
-    <h3>Landing Page for your Game of Life project. It should be a different html file from the Game of life page.</h3>
-    <h3>A simple page to introduce yourself</h3>
-    <br>
-    <h1>Here are some of the topics that you should attempt to work on:</h1>
-    <h3><del>Control speed of the Game of Life. (Checkout framerate, you can use slider to control the framerate )</del></h3>
-    <h3>Allow users to change the rules of survival.</h3>
-    <h3>Allow users to change the rules of reproduction.</h3>
-    <h3><del>Start/Stop the Game of life</del></h3>
-    <h3><del>Multiple colors of life on the same board.</del></h3>
-    <h3><del>Darken colors for stable life.</del></h3>
-    <h3><del>Random initial states</del></h3>
-    <h3><del>Well-known patterns of Game of Life to select from(Examples:Gosper Glider Gun, Glider, Lightweight train).</del></h3>
-    <h3>Use Keyboard to control the cursor to place the life</h3>
-    <h3><del>Resize board on windows resize(Check out windowsResized)</del></h3>
-    <h3>Switching between different styles.</h3>
-    <h3>Anything else that you could think of.</h3>
-  </div>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-black" id="navBar">
+    <div class="container-fluid">
+      <span class="navbar-brand">Game Of Life</span>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-label="Expand Navigation">
+        <div class="navbar-toggler-icon"></div>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul id="menu" class="navbar-nav gap-1">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+        </ul>
+        <span class="form-check-inline form-switch">
+          <input type="checkbox" id="viewMode" class="form-check-input">
+          <label for="viewMode" class="text-light">Dark Mode</label>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <main class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Profile</h1>
+        <h3>Name: HUI Chun Pong</h3>
+        <h3>Learing Purpose: </h3>
+        <br>
+        <h1>XXXXXXXXXXX</h1>
+        <h3>YYYYYYYYYYYY</h3>
+        <br>
+        <h1>Problems</h1>
+        <h3>Place screen centre</h3>
+        <h3>modify the screen </h3>
+        <h3>Add padding-top/padding-bottom at Header</h3>
+        <h3>Add Style at the function btn/add setting</h3>
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
+  <script src="about.js"></script>
 </body>
 </html>

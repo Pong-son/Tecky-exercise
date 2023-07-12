@@ -6,35 +6,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1st Project</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <link rel="stylesheet" href="project.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav>Menu Bar
-      <ul>
-        <li><a href="../../WEFV01/WEF008/index.html">Home</a></li>
-        <li><a href="../../WEFV01/WEF008/about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section class="controlTool">
-    <span><button onclick="startStopBtn()" id="startBtn">test</button></span>
-    <span>Start/Stop</span>
-    <button id="small">Small Screen</button>
-    <button id="middle">Middle Screen</button>
-    <button id="large">Large Screen</button>
-    <button id="gosperGliderGun">Gosper Glider Gun</button>
-    <button id="glider">Glider</button>
-    <button id="lightweightSpaceShip">Lightweight Space Ship</button>
-    <button id="copperheadSpaceship">Copperhead Spaceship</button>
-    <span id="born"></span>
-    <span id="die"></span>
-    <span>Speed: <label for="controlSpeed"></label><input type="range" name="controlSpeed" id="controlSpeed" min="0.5" max="50" value="1" step="0.1"></span>
-  </section>
-  <div id='canvas'>
-  </div>
-  <button id="reset-game">Reset</button>
-  <button id="resetZero">Reset to Zero</button>
+  <nav class="navbar navbar-expand-md navbar-dark bg-black" id="navBar">
+    <div class="container-fluid text-primary">
+      <span class="navbar-brand">Game Of Life</span>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-label="Expand Navigation">
+        <div class="navbar-toggler-icon"></div>
+      </button>
+      <div class="collapse navbar-collapse justify-content-md-end" style="width: auto" id="nav">
+        <ul id="menu" class="navbar-nav gap-1">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+        </ul>
+        <span class="form-check-inline form-switch">
+          <input type="checkbox" id="viewMode" class="form-check-input">
+          <label for="viewMode" class="text-light">Dark Mode</label>
+        </span>
+      </div>
+    </div>
+  </nav>
+  <main class="container">
+    <section class="row controlTool">
+      <div class="col">
+        <button onclick="startStopBtn()" id="startBtn" class="btn btn-primary btn-sm">START</button>
+        <div class="btn-group btn-group-sm">
+          <select name="patternSelect" id="patternSelect">
+            <option value="random">Random</option>
+            <option value="gosperGliderGun">Gosper Glider Gun</option>
+            <option value="glider">Glider</option>
+            <option value="lightweightSpaceShip">Lightweight Space Ship</option>
+            <option value="copperheadSpaceship">Copperhead Spaceship</option>
+          </select>
+          <button id="goBtn" class="btn btn-primary">Go</button>
+        </div>
+        <div class="btn-group btn-group-sm" role="group">
+          <button id="screenSizeBtn" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Screen Size</button>
+          <ul class="dropdown-menu">
+            <li id="small" class="dropdown-item">Small</li>
+            <li id="middle" class="dropdown-item">Middle</li>
+            <li id="large" class="dropdown-item">Large</li>
+          </ul>
+        </div>
+        <button id="conditionBtn" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Setting</button>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col">
+        <label for="noBound"><input type="checkbox" name="noBound" id="noBound"> No Boundary</label>
+        <span>Speed: <label for="controlSpeed"></label><input type="range" name="controlSpeed" id="controlSpeed" min="1" max="50" value="1" step="0.5"></span>
+        <span>Size: <label for="controlSize"></label><input type="range" name="controlSize" id="controlSize" min="10" max="50" value="50" step="5"></span>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col">
+        <span>Turn: <span id="turnCount"></span></span>
+        <span id="born">Born: <span id="bornCount"></span></span>
+        <span id="die">Die: <span id="dieCount"></span></span>
+      </div>
+    </section>
+
+    <div class="row justify-content-center " id='canvas'>
+    </div>
+
+    <div class="row justify-content-center">
+      <button id="resetZero" class="col-2 btn btn-primary">Reset to Zero</button>
+    </div>
+    <section id="modal" class="modal fade" data-bs-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 >Setting</h1>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div id="rule" >
+              <h2>Survival Rule</h2>
+              <div class="input-group">
+                <input type="text" id="surNeiLess" placeholder="2" value="2">
+                <div class="input-group-text">neighbors</div>
+                <input type="text" id="surNeiMore" placeholder="3" value="3">
+              </div>
+              <div class="form-floating">
+                <input type="text" id="surCur" class="form-control" placeholder="1" value="1">
+                <label for="surCur" class="form-label">Current</label>
+              </div>
+              <hr>
+              <h2>Reproduction Rule</h2>
+              <div class="form-floating">
+                <input type="text" id="repNei" class="form-control" placeholder="3" value="3">
+                <label for="repNei" class="form-label">Neighbor</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" id="repCur" class="form-control" placeholder="0" value="0">
+                <label for="repCur" class="form-label">Current</label>
+              </div>
+              <hr>
+              <button id="saveBtn" class="btn btn-dark " data-bs-dismiss="modal">Save</button>
+            </div>
+            <div id="style" class="visually-hidden">
+              <h2>Style</h2>
+              <div class="input-group">
+                <input type="text" id="surNeiLess" placeholder="2" value="2">
+                <div class="input-group-text">neighbors</div>
+                <input type="text" id="surNeiMore" placeholder="3" value="3">
+              </div>
+              <div class="form-floating">
+                <input type="text" id="surCur" class="form-control" placeholder="1" value="1">
+                <label for="surCur" class="form-label">Current</label>
+              </div>
+              <hr>
+              <h2>Reproduction Rule</h2>
+              <div class="form-floating">
+                <input type="text" id="repNei" class="form-control" placeholder="3" value="3">
+                <label for="repNei" class="form-label">Neighbor</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" id="repCur" class="form-control" placeholder="0" value="0">
+                <label for="repCur" class="form-label">Current</label>
+              </div>
+              <hr>
+              <button id="saveBtn" class="btn btn-dark " data-bs-dismiss="modal">Save</button>
+            </div>
+            <!-- new add -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.6.0/lib/p5.js"></script>
   <script src="project.js"></script>
