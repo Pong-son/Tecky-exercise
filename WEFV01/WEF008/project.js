@@ -13,6 +13,13 @@ let modeColor = {
   stableColor:'black'
 }
 
+document.querySelector('#surNeiLess').value = 2
+document.querySelector('#surNeiMore').value = 3
+document.querySelector('#surCur').value = 1
+document.querySelector('#repNei').value = 3
+document.querySelector('#repCur').value = 0
+
+let scrSize = "middle"
 let start = false
 let countDie = 0
 document.querySelector('#dieCount').textContent = countDie
@@ -20,7 +27,7 @@ let countBorn = 0
 document.querySelector('#bornCount').textContent = countBorn
 const startStopBtn = () => {
   changeStartBtn()
-    start = !start
+  start = !start
 }
 const startbtn = document.querySelector('#startBtn')
 let turnNo = document.querySelector('#turnCount')
@@ -69,8 +76,8 @@ size.addEventListener('change',(e) => {
   }
 })
 
-let columns = Math.floor(8000  / unitLength);
-let rows    = Math.floor(3500 / unitLength);
+let columns = Math.floor(8000  / unitLength)
+let rows    = Math.floor(3500 / unitLength)
 
 function setup(){
   /* Set the canvas to be under the element #canvas*/
@@ -83,7 +90,7 @@ function setup(){
 	nextBoard = [];
   staticStatus = {}
 	for (let i = 0; i < columns; i++) {
-		currentBoard[i] = [];
+    currentBoard[i] = [];
 		nextBoard[i] = []
   }
 	// Now both currentBoard and nextBoard are array of array of undefined values.
@@ -135,10 +142,10 @@ function generate() {
         for (let j of [-1, 0, 1]) {
           if(i === 0 && j === 0){
             // the cell itself is not its own neighbor
-          continue
-        }
-        // The modulo operator is crucial for wrapping on the edge
-        if (noBoundary) {
+            continue
+          }
+          // The modulo operator is crucial for wrapping on the edge
+          if (noBoundary) {
           neighbors += (currentBoard[(x + i + columns) % columns][(y + j + rows) % rows]> 0)?1:0 
         } else {
           if ( columns > (x + i) && (x + i) >= 0 && rows > (y + j) && (y + j) >= 0) {
@@ -172,7 +179,6 @@ function generate() {
         nextBoard[x][y] = 1;
         staticStatus[x + '' + y] = 0
         countBorn++
-        //   console.log('Born',countBorn);
       } else {
         // Static
         nextBoard[x][y] = currentBoard[x][y];
@@ -187,22 +193,35 @@ function generate() {
   // Swap the nextBoard to be the current Board
   [currentBoard, nextBoard] = [nextBoard, currentBoard];
 }
+
 /**
  * When mouse is dragged
 */
 let pointer = {x:0,y:0}
 let prePointer = {x:0,y:0}
 
+// mouseEvent
 function mouseDragged() {
-  prePointer.x = pointer.x
-  prePointer.y = pointer.y
+  if(pointer.x < 0) {
+    ''
+  } else {
+    prePointer.x = pointer.x
+  }
+  if(pointer.y < 0) {
+    ''
+  } else {
+    prePointer.y = pointer.y
+  }
   /**
    * If the mouse coordinate is outside the board
   */
-  pointer.x = Math.floor(mouseX / unitLength);
-  pointer.y = Math.floor(mouseY / unitLength);
+ pointer.x = Math.floor(mouseX / unitLength);
+ pointer.y = Math.floor(mouseY / unitLength);
   if (pointer.x !== prePointer.x || pointer.y !== prePointer.y) {
     if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+      return;
+    }
+    if (mouseX < -1 || mouseY < -1) {
         return;
     }
     if (currentBoard[pointer.x][pointer.y] === 0) {
@@ -225,7 +244,10 @@ function mousePressed() {
   pointer.y = Math.floor(mouseY / unitLength)
   if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
     return;
-}
+  }
+  if (mouseX < -1 || mouseY < -1) {
+    return;
+  }
   if (currentBoard[pointer.x][pointer.y] === 0) {
     currentBoard[pointer.x][pointer.y] = 1
     fill(modeColor.box1Color)
@@ -244,6 +266,9 @@ function mouseReleased() {
   if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
     return;
   }
+  if (mouseX < -1 || mouseY < -1) {
+    return;
+  }
   if (currentBoard[pointer.x][pointer.y] === 0) {
     fill(modeColor.box0Color)
   } else {
@@ -251,9 +276,98 @@ function mouseReleased() {
   }
   rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
 }
+
+// touchEvent
+function touchStarted() {
+  pointer.x = Math.floor(mouseX / unitLength)
+  pointer.y = Math.floor(mouseY / unitLength)
+  if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+    return;
+  }
+  if (mouseX < -1 || mouseY < -1) {
+    return;
+  }
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    currentBoard[pointer.x][pointer.y] = 1
+    fill(modeColor.box1Color)
+    stroke(modeColor.strokeColor)
+    rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+  } else {
+    currentBoard[pointer.x][pointer.y] = 0
+    fill(modeColor.box1Color)
+    rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+  }
+  blocked()
+  noLoop()
+  return false;
+}
+function touchMoved() {
+  if(pointer.x < 0) {
+    ''
+  } else {
+    prePointer.x = pointer.x
+  }
+  if(pointer.y < 0) {
+    ''
+  } else {
+    prePointer.y = pointer.y
+  }
+  /**
+   * If the mouse coordinate is outside the board
+  */
+  pointer.x = Math.floor(mouseX / unitLength);
+  pointer.y = Math.floor(mouseY / unitLength);
+  if (pointer.x !== prePointer.x || pointer.y !== prePointer.y) {
+    if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+        return;
+    }
+    if (mouseX < -1 || mouseY < -1) {
+        return;
+    }
+    if (currentBoard[pointer.x][pointer.y] === 0) {
+      currentBoard[pointer.x][pointer.y] = 1
+      fill(modeColor.box1Color)
+      stroke(modeColor.strokeColor)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+    } else {
+      currentBoard[pointer.x][pointer.y] = 0
+      fill(modeColor.box0Color)
+      rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+    }
+  } else {
+  }
+  blocked()
+  return false;
+}
+function touchEnded() {
+  stroke(modeColor.strokeColor)
+  if (mouseX > unitLength * columns || mouseY > unitLength * rows) {
+    return;
+  }
+  if (mouseX < -1 || mouseY < -1) {
+    return;
+  }
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    fill(modeColor.box0Color)
+  } else {
+    fill(modeColor.box1Color)
+  }
+  rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
+  return false;
+}
+
+// keyboardEvent
 function keyPressed() {
-  prePointer.x = pointer.x
-  prePointer.y = pointer.y
+  if(pointer.x < 0) {
+    ''
+  } else {
+    prePointer.x = pointer.x
+  }
+  if(pointer.y < 0) {
+    ''
+  } else {
+    prePointer.y = pointer.y
+  }
   
   if (keyCode === RIGHT_ARROW) {
     if (pointer.x === (floor(width / unitLength)-1)) {
@@ -279,7 +393,8 @@ function keyPressed() {
     } else {
       pointer.y--
     }
-  } else if (keyCode === ENTER) {
+    // press enter and spacebar
+  } else if (keyCode === ENTER || keyCode === 32) {
     if (currentBoard[pointer.x][pointer.y] === 0) {
       fill(modeColor.box1Color)
       rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
@@ -304,8 +419,14 @@ function keyReleased() {
   }
   rect(pointer.x * unitLength, pointer.y * unitLength, unitLength, unitLength)
 }
+
 // highlight current Block
 function blocked() {
+  if (currentBoard[pointer.x][pointer.y] === 0) {
+    fill(modeColor.box0Color)
+  } else {
+    fill(modeColor.box1Color)
+  }
   stroke(modeColor.selectStrokeColor)
   rect(pointer.x * unitLength +2.5, pointer.y * unitLength +2.5, unitLength -5, unitLength -5)
 
@@ -343,16 +464,29 @@ function changeStartBtn () {
   }
 }
 
-
-
+// screenSize Controller
+function windowResized() {
+  if(scrSize === "small") {
+    resizeCanvas(unitLength * floor(((windowWidth - 100)/2)/unitLength), unitLength * floor(((windowHeight - 200)/2)/unitLength))
+  } else if (scrSize === "middle") {
+    resizeCanvas(unitLength * floor((windowWidth - 100)/1.5/unitLength), unitLength * floor((windowHeight - 200)/1.5/unitLength))
+  } else if (scrSize === "large") {
+    resizeCanvas(unitLength * floor((windowWidth - 100)/unitLength), unitLength * floor((windowHeight - 200)/unitLength))
+  } else {
+    return
+  }
+}
 document.querySelector('#small').addEventListener('click',function windowResized() {
   resizeCanvas(unitLength * floor(((windowWidth - 100)/2)/unitLength), unitLength * floor(((windowHeight - 200)/2)/unitLength))
+  scrSize = "small"
 })
 document.querySelector('#middle').addEventListener('click',function windowResized() {
   resizeCanvas(unitLength * floor((windowWidth - 100)/1.5/unitLength), unitLength * floor((windowHeight - 200)/1.5/unitLength))
+  scrSize = "middle"
 })
 document.querySelector('#large').addEventListener('click',function windowResized() {
   resizeCanvas(unitLength * floor((windowWidth - 100)/unitLength), unitLength * floor((windowHeight - 200)/unitLength))
+  scrSize = "large"
 })
 
 // pattern of Game of Life
@@ -484,8 +618,6 @@ document.querySelector('#goBtn').addEventListener('click', () => {
   redraw()
 })
 
-// window.innerHeight, window.innerWidth
-console.log(window.innerHeight, window.innerWidth)
 let noBoundary = false
 document.querySelector('#noBound').addEventListener('click', () => {
   noBoundary = !noBoundary
@@ -496,13 +628,31 @@ document.querySelector('#noBound').addEventListener('click', () => {
   }
 })
 
+let yourName = ''
+document.querySelector('#getYrName').addEventListener('click', () => {
+  yourName = document.querySelector('#yourName').value
+  if (yourName !== '') {
+    yourName = "Hello, "+ yourName
+  } else {
+    yourName = "Hello, Visitor"
+  }
+  document.querySelector('#playerName').innerText = yourName
+  document.querySelector('#landingPage').classList.add('visually-hidden')
+  document.querySelector('#gameArea').classList.remove('visually-hidden')
+})
+
 // rule controller
 document.querySelector('#saveBtn').addEventListener('click',()=>{
-  condition.surNeiLess = Number(document.querySelector('#surNeiLess').value)
-  condition.surNeiMore = Number(document.querySelector('#surNeiMore').value)
-  condition.repCurrent = Number(document.querySelector('#surCur').value)
-  condition.repNei = Number(document.querySelector('#repNei').value)
-  condition.repCurrent = Number(document.querySelector('#repCur').value)
+  if(Number(document.querySelector('#surNeiLess').value) > Number(document.querySelector('#surNeiMore').value)) {
+    document.querySelector('#surNeiLess').value = 2
+    alert("A can not be greater than B")
+  } else {
+    condition.surNeiLess = Number(document.querySelector('#surNeiLess').value)
+    condition.surNeiMore = Number(document.querySelector('#surNeiMore').value)
+    condition.surCurrent = Number(document.querySelector('#surCur').value)
+    condition.repNei = Number(document.querySelector('#repNei').value)
+    condition.repCurrent = Number(document.querySelector('#repCur').value)
+  }
 })
 
 // mode controller
@@ -525,9 +675,11 @@ document.querySelector('#viewMode').addEventListener('click',() => {
       stableColor:'darkgrey'
     }
     document.querySelector('body').classList.add('lightMode')
-    document.querySelector('.btn-primary').classList.remove('btn-primary')
-    document.querySelector('#startBtn').classList.remove('btn-primary')
-    document.querySelector('#startBtn').classList.add('btn-light') 
+
+    document.querySelectorAll('button').forEach(btn => btn.classList.remove('btn-primary'))
+    document.querySelectorAll('button').forEach(btn => btn.classList.add('btn-warning'))
+    // document.querySelector('#startBtn').classList.remove('btn-primary')
+    // document.querySelector('#startBtn').classList.add('btn-light') 
   } else {
     modeColor = {
       dark:true,
@@ -543,8 +695,12 @@ document.querySelector('#viewMode').addEventListener('click',() => {
       stableColor:'black'
     }
     document.querySelector('body').classList.remove('lightMode')
-    document.querySelector('#startBtn').classList.remove('btn-light')
-    document.querySelector('#startBtn').classList.add('btn-primary')
+    document.querySelectorAll('button').forEach(btn => btn.classList.remove('btn-warning'))
+    document.querySelectorAll('button').forEach(btn => btn.classList.add('btn-primary'))
+    // document.querySelector('#startBtn').classList.remove('btn-light')
+    // document.querySelector('#startBtn').classList.add('btn-primary')
   }
   redraw()
 })
+
+

@@ -1,5 +1,15 @@
+@import './style/main.css';
+
+:root{
+  --bgcolor: #ffcc00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
 body{
-  background-color: #ffcc00;
+  background-color: var(--bgcolor);
   overflow-x: hidden;
 }
 #mainContainer{
@@ -15,7 +25,19 @@ body{
   right: 0px;
   z-index: 1030;
 }
+.chooseitem{
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+  color: white;
+}
+.itemtoright{
+  margin-left: 250px;
+}
 #menuBtn{
+  z-index: 5;
+  transform: translateY(50%);
   background-color: black;
   border: 0;
   padding: 0;
@@ -57,7 +79,7 @@ a.menuItem{
 .menuToggle{
   display:block;
 }
-#container{
+.container{
   width: 1210px;
   margin: auto;
 }
@@ -170,8 +192,9 @@ nav.top-navbar{
   border: 1px solid black;
 }
 
-@media (width <= 1280px) {
-  #container{
+@media (width <= 1290px) {
+  .container{
+    max-width: 1116px;
     padding-top: 50px;
     width: 97%;
     margin: auto;
@@ -192,7 +215,7 @@ nav.top-navbar{
   }
 }
 
-@media (width <= 768px) {
+@media (width <= 770px) {
   .titleOfBanner{
     visibility: hidden;
   }

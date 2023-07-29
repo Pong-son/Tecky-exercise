@@ -12,6 +12,7 @@ document.querySelector('#menuBtn').addEventListener('click', () => {
     document.querySelector('#mainContainer').classList.remove('opened')
     document.querySelector('#navbar').classList.remove('narbarOpen')
     document.querySelector('#navbar').classList.add('fixed-top')
+    document.querySelector('.chooseitem').classList.remove('itemtoright')
     menuOpen = false
   } else {
     document.querySelector('#navbarMenu').classList.add('openMenu')
@@ -19,6 +20,7 @@ document.querySelector('#menuBtn').addEventListener('click', () => {
     document.querySelector('#mainContainer').classList.add('opened')
     document.querySelector('#navbar').classList.add('narbarOpen')
     document.querySelector('#navbar').classList.remove('fixed-top')
+    document.querySelector('.chooseitem').classList.add('itemtoright')
     menuOpen = true
   }
 })

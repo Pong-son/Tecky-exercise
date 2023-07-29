@@ -1,0 +1,35 @@
+// {
+//   "extends": "@tsconfig/node12/tsconfig.json",
+//   "compilerOptions": {
+//     "preserveConstEnums": true
+//   },
+//   "include": ["*"],
+//   "exclude": ["*.spec.ts"]
+// }
+
+{
+  "compilerOptions": {
+      "module": "commonjs",
+      "target": "es5",
+      "lib": ["es6", "dom"],
+      "sourceMap": true,
+      "allowJs": true,
+      "jsx": "react",
+      "esModuleInterop":true,
+      "moduleResolution": "node",
+      "noImplicitReturns": true,
+      "noImplicitThis": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "noUnusedLocals": false
+  },
+  "exclude": [
+      "node_modules",
+      "build",
+      "scripts",
+      "index.js"
+  ]
+}
+// err msg
+// Option 'suppressImplicitAnyIndexErrors' is deprecated and will stop functioning in TypeScript 5.5. Specify compilerOption '"ignoreDeprecations": "5.0"' to silence this error.

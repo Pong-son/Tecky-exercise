@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ex1.css">
+</head>
+<body>
+  <div id="mainContainer">
+    <nav id="navbar" class="top-navbar navbar bs-danger-text fixed-top">
+      <div class="container-fluid">
+        <button id="menuBtn">
+          <span id="menu"></span>
+          <span id="menu"></span>
+          <span id="menu"></span>
+        </button>
+        <div class="chooseitem">Homepage Alt 1</div>
+        <div class="navbar-collapse closeMenu" id="navbarMenu">
+          <ul class="navbar-nav">
+            <li class="dropdown">
+              <a class="menuItem" href="#" role="button" aria-expanded="false">
+                HOMEPAGE
+              </a>
+              <ul>
+                <li><a class="menuItem" href="#">Homepage Alt 1</a></li>
+                <li><a class="menuItem" href="#">Homepage Alt 2</a></li>
+                <li><a class="menuItem" href="#">Homepage Alt 3</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="menuItem" aria-current="page" href="#">NEWS</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">SHOP</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">ARTISTS</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">DISCOGRAPHY</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">EVENTS</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">GALLERIES</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">VIDEOS</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">FULLWIDTH</a>
+            </li>
+            <li>
+              <a class="menuItem" href="#">CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <header class="row header">
+        <div class="col-12 col-md-6"><img height="98px" src="./asset/acoustic_logo.png" alt="logo"></div>
+        <div class="col-12 col-md-6 icons">
+            <a href="#"><img src="./asset/facebook.png" alt="facebook"></a>
+            <a href="#"><img src="./asset/twitter.png" alt="twitter"></a>
+            <a href="#"><img src="./asset/dribbble.png" alt="dribbble"></a>
+            <a href="#"><img src="./asset/soundcloud-logo.png" alt="soundcloud"></a>
+        </div>
+      </header>
+      <nav class="nd-navbar navbar navbar-expand-lg">
+        <div>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  HOMEPAGE
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item active" href="#">Homepage Alt 1</a></li>
+                  <li><a class="dropdown-item" href="#">Homepage Alt 2</a></li>
+                  <li><a class="dropdown-item" href="#">Homepage Alt 3</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="active" aria-current="page" href="#">NEWS</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">SHOP</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">ARTISTS</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">DISCOGRAPHY</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">EVENTS</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">GALLERIES</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">VIDEOS</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">FULLWIDTH</a>
+              </li>
+              <li class="nav-item">
+                <a href="#">CONTACT</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class=" slider" id="banner">
+        <img id="bannerImage"
+        src="./asset/bn-1.jpg" alt='banner'
+        >
+        <div class="titleOfBanner">
+          <div class="titleText"></div>
+          <span>Read more</span>
+        </div>
+      </div>
+      <div class="r-banner">
+        <input type="radio" name="banner" id="bn-1">
+        <input type="radio" name="banner" id="bn-2">
+        <input type="radio" name="banner" id="bn-3">
+      </div>
+      <!-- for LATEST MEDIA -->
+      <div class="media">
+        <div id="latestMediaTitle" class="top_title">LATEST MEDIA</div>
+        <div id="latestMedia">
+          <div class="l-media card view_set">
+            <div>
+              <img src="./asset/content/latest_media/JazzClub.jpg" alt="jassClub">
+            </div>
+            <div class="media_content">
+              <div class="name">JazzClub</div>
+              <div class="location">Barcelona, Spain</div>
+              <div class="button">VIEW SET</div>
+            </div>
+          </div>
+          <div class="l-media card read_more">
+            <div>
+              <img src="./asset/content/latest_media/Local Natives.jpg" alt="localNatives">
+            </div>
+            <div class="media_content">
+              <div class="name">Local Natives</div>
+              <div class="button">READ MORE</div>
+            </div>
+          </div>
+          <div class="l-media card view_set">
+            <div>
+              <img src="./asset/content/latest_media/Factory.jpg" alt="factory">
+            </div>
+            <div class="media_content">
+              <div class="name">Factory</div>
+              <div class="location">London, UK</div>
+              <div class="button">VIEW SET</div>
+            </div>
+          </div>
+          <div class="l-media card read_more">
+            <div>
+              <img src="./asset/content/latest_media/Another YouTube.jpg" alt="anotherYT">
+            </div>
+            <div class="media_content">
+              <div class="name">Another YouTube</div>
+              <div class="button">READ MORE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <!-- Content 1 -->
+        <div class="content" id="contentOne">
+          <div id="latestNews" class="top_title">LATEST NEWS</div>
+          <div class="news">
+            <div class="new">
+              <div class="new_image">
+                <img src="./asset/content/latest_news/The Interview.jpg" alt="news">
+                <div class="date">
+                  <span class="day">31</span>
+                  <span class="month">DEC</span>
+                  <span class="year">2018</span>
+                </div>
+              </div>
+              <div class="new_content">
+                <div class="topic">The Interview</div>
+                <div class="filter">Filed Under: <span class="underline">News</span></div>
+                <div class="descrption">In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra auctor lobortis. Pellentesque eu est a nulla placerat dignissim. Morbi[…]</div>
+              </div>
+            </div>
+            <div class="new">
+              <div class="new_image">
+                <img src="./asset/content/latest_news/Paco de lucia tour dates announced.jpg" alt="conterts">
+                <div class="date">
+                  <span class="day">30</span>
+                  <span class="month">DEC</span>
+                  <span class="year">2018</span>
+                </div>
+              </div>
+              <div class="new_content">
+                <div class="topic">Paco de lucia tour dates announced</div>
+                <div class="filter">Filed Under: <span class="underline">Concerts</span></div>
+                <div class="descrption">In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra auctor lobortis. Pellentesque eu est a nulla placerat dignissim. Morbi[…]</div>
+              </div>
+            </div>
+            <div class="new">
+              <div class="new_image">
+                <img src="./asset/content/latest_news/The Player.jpg" alt="concerts">
+                <div class="date">
+                  <span class="day">29</span>
+                  <span class="month">DEC</span>
+                  <span class="year">2018</span>
+                </div>
+              </div>
+              <div class="new_content">
+                <div class="topic">The Player</div>
+                <div class="filter">Filed Under: <span class="underline">Concerts</span></div>
+                <div class="descrption">In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra auctor lobortis. Pellentesque eu est a nulla placerat dignissim. Morbi[…]</div>
+              </div>
+            </div>
+            <div class="new">
+              <div class="new_image">
+                <img src="./asset/content/latest_news/Guitar lessons every Thursday.jpg" alt="news">
+                <div class="date">
+                  <span class="day">28</span>
+                  <span class="month">DEC</span>
+                  <span class="year">2018</span>
+                </div>
+              </div>
+              <div class="new_content">
+                <div class="topic">Guitar lessons every Thursday</div>
+                <div class="filter">Filed Under: <span class="underline">News</span></div>
+                <div class="descrption">In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra auctor lobortis. Pellentesque eu est a nulla placerat dignissim. Morbi[…]</div>
+              </div>
+            </div>
+            <div class="new">
+              <div class="new_image">
+                <img src="./asset/content/latest_news/The best drummers for 2016.jpg" alt="news">
+                <div class="date">
+                  <span class="day">27</span>
+                  <span class="month">DEC</span>
+                  <span class="year">2018</span>
+                </div>
+              </div>
+              <div class="new_content">
+                <div class="topic">The best drummers for 2016</div>
+                <div class="filter">Filed Under: <span class="underline">News</span></div>
+                <div class="descrption">In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra auctor lobortis. Pellentesque eu est a nulla placerat dignissim. Morbi[…]</div>
+              </div>
+            </div>
+            <div class="new_btn">
+              <span class="active">1</span>
+              <span>2</span>
+              <span>Next >></span>
+            </div>
+          </div>
+        </div>
+        <!-- Content 2 -->
+        <div class="content" id="contentTwo">
+          <div>
+            <div id="upcomingEvents" class="top_title">UPCOMING EVENTS</div>
+            <div class="event_content">
+              <div class="date">
+                <span class="day">16</span>
+                <span class="month">APR</span>
+                <span class="year">2023</span>
+              </div>
+              <div class="card">
+                <div class="name underline">Brasil</div>
+                <div class="location">Rio, Brasil</div>
+                <div class="button">CUSTOM TEXT</div>
+              </div>
+            </div>
+          </div>
+          <div class="gallery">
+            <div id="photoGalleries" class="top_title">PHOTO GALLERIES</div>
+            <div>
+              <div class="card">
+                <div><img src="./asset/content/photo_gallery/Olympic Stadium.jpg" alt="olympic"></div>
+                <div class="gallery_content">
+                  <div class="name">Olympic Stadium</div>
+                  <div class="location">Athens, Greece</div>
+                  <div class="button">VIEW SET</div>
+                </div>
+              </div>
+              <div class="card nd_content">
+                <div><img src="./asset/content/photo_gallery/Place.jpg" alt="place"></div>
+                <div class="gallery_content">
+                  <div class="name">Place</div>
+                  <div class="location">Ibiza, Spain</div>
+                  <div class="button">VIEW SET</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dun-miss-it">
+            <div id="dontMissIt" class="top_title">DON’T MISS IT</div>
+            <div>
+              <div class="card"><img src="./asset/content/Athens, GR.jpg" alt="athens"></div>
+              <div class="event_content">
+                <div class="date">
+                  <span class="day">20</span>
+                  <span class="month">FEB</span>
+                  <span class="year">2023</span>
+                </div>
+                <div class="card">
+                  <div class="name">Athens, GR</div>
+                  <div class="location">Onassis Cultural Centre</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="instagram" class="top_title">
+            <div>INSTAGRAM</div>
+            <div class="ig card">
+              <img src="./asset/content/ig/music1_01.jpg" alt="m01">
+              <img src="./asset/content/ig/music1_02.jpg" alt="m02">
+              <img src="./asset/content/ig/music1_03.jpg" alt="m03">
+              <img src="./asset/content/ig/music1_04.jpg" alt="m04">
+              <img src="./asset/content/ig/music1_05.jpg" alt="m05">
+              <img src="./asset/content/ig/music1_06.jpg" alt="m06">
+              <img src="./asset/content/ig/music1_07.jpg" alt="m07">
+              <img src="./asset/content/ig/music1_08.jpg" alt="m08">
+              <img src="./asset/content/ig/music1_09.jpg" alt="m09">
+            </div>
+          </div>
+        </div>
+        <!-- Content 3 -->
+        <div class="content" id="contentThree">
+          <!-- Latest album -->
+          <div>
+            <div id="latestAlbum" class="top_title">LATEST ALBUM</div>
+            <div class="album">
+              <div><img src="./asset/content/latest_album/LATEST ALBUM.jpg" alt="album"></div>
+              <div class="album_info">
+                <div class="name">Familiar Friend</div>
+                <div class="location">Release date: 05-Dec-2016</div>
+              </div>
+              <div class="album_content">
+                <div>
+                  <div class="name">Nobody Move</div>
+                  <div class="location">Self-hosted audio</div>
+                </div>
+                <div class="album_img"><img src="./asset/icon_playback.png" alt="playback"></div>
+              </div>
+              <div class="album_content">
+                <div>
+                  <div class="name">Miss Kitten</div>
+                  <div class="location">Self-hosted audio</div>
+                </div>
+                <div class="album_img"><img src="./asset/icon_playback.png" alt="playback"></div>
+              </div>
+              <div class="album_content">
+                <div>
+                  <div class="name">Return of the Spooky Driver</div>
+                  <div class="location">Self-hosted audio</div>
+                </div>
+                <div class="album_img"><img src="./asset/icon_playback.png" alt="playback"></div>
+              </div>
+              <div class="album_content">
+                <div>
+                  <div class="name">On the Downbeat</div>
+                  <div class="location">Self-hosted audio</div>
+                </div>
+                <div class="album_img"><img src="./asset/icon_playback.png" alt="playback"></div>
+              </div>
+              <div class="album_content">
+                <div>
+                  <div class="name">Ladies and Gentlemen</div>
+                  <div class="location">Self-hosted audio</div>
+                </div>
+                <div class="album_img"><img src="./asset/icon_playback.png" alt="playback"></div>
+              </div>
+            </div>
+          </div>
+          <!-- latest albums -->
+          <div>
+            <div id="latestAlbums" class="top_title">LATEST ALBUMS</div>
+            <div>
+              <div class="card">
+                <div><img src="./asset/content/latest_albums/Danger Room.jpg" alt="danger-room"></div>
+                <div class="gallery_content">
+                  <div class="name">Danger Room</div>
+                  <div class="location">Release date: 01-Jan-2016</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+              <div class="card nd_content">
+                <div><img src="./asset/content/latest_albums/Sonny Rollins.jpg" alt="sonny-rollins"></div>
+                <div class="gallery_content">
+                  <div class="name">Sonny Rollins</div>
+                  <div class="location">Release date: 01-Jan-2016</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Artists -->
+          <div>
+            <div id="artists" class="top_title">ARTISTS</div>
+            <div class="artists">
+              <div class="artist">
+                <div>
+                  <img src="./asset/content/artists/George Benson.jpg" alt="george">
+                </div>
+                <div class="card">
+                  <div class="name">George Benson</div>
+                  <div class="location">Singer</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+              <div class="artist">
+                <div>
+                  <img src="./asset/content/artists/Juliana Morisson.jpg" alt="juliana">
+                </div>
+                <div class="card">
+                  <div class="name">Juliana Morisson</div>
+                  <div class="location">Singer</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+              <div class="artist">
+                <div>
+                  <img src="./asset/content/artists/Julie Smith.jpg" alt="julie">
+                </div>
+                <div class="card">
+                  <div class="name">Julie Smith</div>
+                  <div class="location">Singer</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+              <div class="artist">
+                <div>
+                  <img src="./asset/content/artists/Alan Polovski.jpg" alt="alan">
+                </div>
+                <div class="card">
+                  <div class="name">Alan Polovski</div>
+                  <div class="location">Drummer</div>
+                  <div class="button">READ MORE</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Latest Vedios -->
+          <div>
+            <div id="latestvideos" class="top_title">LATEST VIDEOS</div>
+            <div class="card">
+              <div><img src="./asset/content/Burn Live.jpg" alt="burn_live"></div>
+              <div class="gallery_content">
+                <div class="name">Burn Live</div>
+                <div class="button">READ MORE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <div id="fd-textWidget">
+          <div class="textWidget">
+            <div class="title">TEXT WIDGET</div>
+            <span>
+              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </span>
+          </div>
+          <div class="textWidget">
+            <div class="title">TEXT WIDGET</div>
+            <span>
+              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin vel ante a orci tempus eleifend ut et magna.
+            </span>
+          </div>
+        </div>
+        <div id="fd-instagram">
+          <div class="title">INSTAGRAM</div>
+          <div class="ig">
+            <img src="./asset/content/ig/music1_01.jpg" alt="m01">
+            <img src="./asset/content/ig/music1_02.jpg" alt="m02">
+            <img src="./asset/content/ig/music1_03.jpg" alt="m03">
+            <img src="./asset/content/ig/music1_04.jpg" alt="m04">
+            <img src="./asset/content/ig/music1_05.jpg" alt="m05">
+            <img src="./asset/content/ig/music1_06.jpg" alt="m06">
+            <img src="./asset/content/ig/music1_07.jpg" alt="m07">
+            <img src="./asset/content/ig/music1_08.jpg" alt="m08">
+            <img src="./asset/content/ig/music1_09.jpg" alt="m09">
+          </div>
+        </div>
+        <div id="fd-products">
+          <div class="title">PRODUCTS</div>
+          <div class="product_card">
+            <div><img src="./asset/content/products/1.jpg" alt="p1"></div>
+            <div class="product_content">
+              <div>Fam Fam Fam the Acoustic</div>
+              <div>£23.99</div>
+            </div>
+          </div>
+          <div class="product_card">
+            <div><img src="./asset/content/products/2.jpg" alt="p2"></div>
+            <div class="product_content">
+              <div>Kool & The Gang</div>
+              <div>£16.99 £12.99</div>
+            </div>
+          </div>
+          <div class="product_card">
+            <div><img src="./asset/content/products/3.jpg" alt="p3"></div>
+            <div class="product_content">
+              <div>Push the button</div>
+              <div>£14.99</div>
+            </div>
+          </div>
+        </div>
+        <div class="textWidget">
+          <div class="title">TEXT WIDGET</div>
+          <span>
+            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <br>
+            <span class="highlight">Music WordPress Theme </span>
+            by CSSIgniter</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <script src="ex1.js"></script>
+</body>
+</html>

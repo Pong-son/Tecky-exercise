@@ -6,3 +6,11 @@ main{
   background-color: black;
   color: white;
 }
+
+[for="viewMode"]{
+  width: 100px;
+}
+
+section {
+  padding: 5px 0;
+}
