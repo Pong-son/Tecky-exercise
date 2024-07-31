@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ex3.ts"
+    "start": "ts-node ex2.ts"
   },
   "author": "",
   "license": "ISC",

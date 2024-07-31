@@ -1,0 +1,17 @@
+{
+  "name": "wsp003",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node bonus.ts",
+    "daily": "ts-node daily.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/papaparse": "^5.3.14",
+    "papaparse": "^5.4.1"
+  }
+}
